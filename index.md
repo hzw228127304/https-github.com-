@@ -1,37 +1,8 @@
-## Welcome to GitHub Pages
+## Welcome to Ahuang Pages
 
-You can use the [editor on GitHub](https://github.com/hzw228127304/https-github.com-/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-2
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/hzw228127304/https-github.com-/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Record my FAQ
+### 关于TCP Client 接收数据延迟问题
+说明：此问题于22/8/13日调试015项目发现，与线体PLC通讯的时候发现对方数据实际已经更新，但是我这边数据可以正常接收，但是会延迟30-60秒才能拿到上一个最新数据，Flush也无法解决，只能通过
+断开连接再重新连接拿到最新数据，但是不停的断开打开通讯不是解决问题的方法
+### 答案：后发现读取数据的时候把读取长度加长就解决了这个问题，我原本是读取10个byte 我加到1024后，此问题解决
+![Uploading image.png…]()
