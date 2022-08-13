@@ -6,3 +6,47 @@ Record my FAQ
 断开连接再重新连接拿到最新数据，但是不停的断开打开通讯不是解决问题的方法
 ### 答案：后发现读取数据的时候把读取长度加长就解决了这个问题，我原本是读取10个byte 我加到1024后，此问题解决
 
+###  json获取指定key的value
+        /// <summary>
+        /// 从json中获取对应key的value值
+        /// </summary>
+        /// <param name="json字符串"></param>
+        /// <param name="需要取value对应的key"></param>
+        /// <returns></returns>
+        public string GetJsonValue(string strJson , string key)
+        {
+            //测试：
+            //strJson = @"{'1':{'id':{'ip':'192.168.0.1','p':34,'pass':'ff','port':80,'user':'t'}},'code':0}";
+            //key = "user"
+            string strResult="";
+            JObject jsonObj = JObject.Parse(strJson);
+            strResult = GetNestJsonValue(jsonObj.Children(), key);
+            return strResult;
+        }
+ 
+        /// <summary>
+        /// 迭代获取eky对应的值
+        /// </summary>
+        /// <param name="jToken"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public string GetNestJsonValue(JEnumerable<JToken> jToken, string key)
+        {
+            IEnumerator enumerator = jToken.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                JToken jc = (JToken)enumerator.Current;
+                if (jc is JObject || ((JProperty)jc).Value is JObject)
+                {
+                    return GetNestJsonValue(jc.Children(), key);
+                }
+                else
+                {
+                    if (((JProperty)jc).Name == key)
+                    {
+                        return ((JProperty)jc).Value.ToString();
+                    }
+                }
+            }
+            return null;
+        }
